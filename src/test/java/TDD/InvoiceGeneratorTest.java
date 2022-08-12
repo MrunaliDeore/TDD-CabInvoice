@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.Before;
 
-public class InvoiceGeneratorTest {
 
+public class InvoiceGeneratorTest {
     InvoiceGenerator invoiceGenerator;
 
     @Before
@@ -34,5 +34,13 @@ public class InvoiceGeneratorTest {
         Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
         double fare = invoiceGenerator.calculateFare(rides);
         assertEquals(30, fare, 0.0);
+    }
+
+    @Test
+    public void givenMultipleRidesShouldReturnRideSummary() {
+        Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
+        InvoiceSummury summary = invoiceGenerator.getInvoiceSummary(rides);
+        InvoiceSummury expectedSummary = new InvoiceSummury(2, 30.0);
+        assertEquals(expectedSummary, summary);
     }
 }
